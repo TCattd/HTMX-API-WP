@@ -30,7 +30,7 @@ templates-htmx/private/author-posts.htmx.php
 Check the demo template at `templates-htmx/demo.htmx.php` to see how to use it.
 
 
-Then, in your theme, use HTMX to GET/POST to endpoint corresponding to the template you want to load:
+Then, in your theme, use HTMX to GET/POST to the endpoint corresponding to the template you want to load, without the `.htmx.php` extension:
 
 ```
 /wp-htmx/v1/live-search
