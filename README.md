@@ -6,7 +6,7 @@ It enables a new endpoint `/wp-htmx/v1/` from where you can load any HTMX templa
 
 ## Why?
 
-Because HTMX is awesome and WordPress is awesome. So, why not?
+Because HTMX is awesome and WordPress is awesome (when used properly). So, why not?
 
 I'm using this in production in a few projects and it's working great, stable and ready to use. So I decided to share it with the world.
 
@@ -48,13 +48,13 @@ You can pass data to the template using URL parameters (GET/POST). For example:
 /wp-htmx/v1/related-posts?category_id=5
 ```
 
-All of those parameters will be available inside the template as an array named: `$params`
+All of those parameters (with their values) will be available inside the template as an array named: `$params`
 
 ### HTMX extensions and Hyperscrypt
 
-This plugin comes with [Hyperscript](https://hyperscript.org) pre-loaded.
+This plugin comes with [HTMX](https://htmx.org) already integrated and enabled.
 
-But you can enable any HTMX extension, in the plugin's options page: Settings > HTMX Options.
+You can enable any HTMX extension in the plugin's options page: Settings > HTMX Options.
 
 You can also enable [Hyperscript](https://hyperscript.org) in the same options page.
 
@@ -63,6 +63,14 @@ You can also enable [Hyperscript](https://hyperscript.org) in the same options p
 Every POST call to the endpoint, calling for any template, will automatically check for the nonce. If the nonce is not valid, the call will be rejected.
 
 The nonce itself is auto-generated and added to all HTMX requests automatically.
+
+### REST Endpoint
+
+The plugin will sanitize all paths passed to the new REST endpoint, `wp-htmx`, to avoid security issues, like a directory traversal attack. Also it will limit you so you can't use it to access any file outside the `templates-htmx` folder inside your own theme.
+
+The params and their values passed to the endpoint, vía GET or POST, will be sanitized with `sanitize_key()` and `sanitize_text_field()` respectively.
+
+Filters `hxwp/sanitize_param_key` and `hxwp/sanitize_param_value` are available to modify the sanitization process if needed.
 
 ## Suggestions, Support
 

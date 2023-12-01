@@ -215,7 +215,14 @@ class HXWP_Render
 
 		// Sanitize each param
 		foreach ($params as $key => $value) {
-			$params[$key] = sanitize_text_field($value);
+			// Sanitize key and apply filter in one line
+			$key = apply_filters('hxwp/sanitize_param_key', sanitize_key($key), $key);
+
+			// Sanitize value and apply filter in one line
+			$value = apply_filters('hxwp/sanitize_param_value', sanitize_text_field($value), $value);
+
+			// Update param
+			$params[$key] = $value;
 		}
 
 		// Remove nonce if exists
