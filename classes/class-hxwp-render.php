@@ -259,14 +259,6 @@ class HXWP_Render
 			return false;
 		}
 
-		// Check if string starts with 'template/'. If not, return false
-		if (stripos($template_name, 'template/') !== 0) {
-			return false;
-		}
-
-		// Remove 'template/' from the string
-		$template_name = str_replace('template/', '', $template_name);
-
 		return $template_name;
 	}
 }
