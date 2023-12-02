@@ -60,17 +60,19 @@ You can also enable [Hyperscript](https://hyperscript.org) in the same options p
 
 ## Security
 
-Every POST call to the endpoint, calling for any template, will automatically check for the nonce. If the nonce is not valid, the call will be rejected.
+Every call to the `wp-htmx` endpoint, will automatically check for a valid nonce. If the nonce is not valid, the call will be rejected.
 
-The nonce itself is auto-generated and added to all HTMX requests automatically.
+The nonce itself is auto-generated and added to all HTMX requests automatically, using HTMX own htmx:configRequest event.
 
 ### REST Endpoint
 
-The plugin will sanitize all paths passed to the new REST endpoint, `wp-htmx`, to avoid security issues, like a directory traversal attack. Also it will limit you so you can't use it to access any file outside the `templates-htmx` folder inside your own theme.
+The plugin will perform basic sanitization of calls to the new REST endpoint, `wp-htmx`, to avoid security issues, like a directory traversal attack. Also it will limit you so you can't use it to access any file outside the `templates-htmx` folder inside your own theme.
 
 The params and their values passed to the endpoint, vía GET or POST, will be sanitized with `sanitize_key()` and `sanitize_text_field()` respectively.
 
 Filters `hxwp/sanitize_param_key` and `hxwp/sanitize_param_value` are available to modify the sanitization process if needed.
+
+Do your homework and make sure you are returning non sanitized data back to the user or using it in a way that could be a security issue for your site. HTMX requires that you validate and sanitize any data you receive from the user. Don't forget that.
 
 ## Suggestions, Support
 
