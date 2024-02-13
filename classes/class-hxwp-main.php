@@ -59,6 +59,7 @@ class HXWP_Main
 		add_action('init', [$router, 'register_main_route']);
 		add_action('template_redirect', [$render, 'load_template']);
 		add_action('wp_enqueue_scripts', [$assets, 'enqueue_scripts']);
+		add_action('admin_enqueue_scripts', [$assets, 'enqueue_scripts']);
 		add_action('wp_head', [$config, 'insert_config_meta_tag']);
 
 		if (is_admin()) {
